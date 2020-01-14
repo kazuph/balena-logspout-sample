@@ -1,0 +1,16 @@
+version: '2'
+services:
+  frontend:
+    build: ./frontend
+    depends_on:
+      - logspout
+  logspout:
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    build: ./logspout
+    ports:
+      - "80:80"
+    # environment:
+    #   - DOCKER_HOST="unix:///var/run/balena-engine.sock"
+    labels:
+      io.balena.features.balena-socket: 1
